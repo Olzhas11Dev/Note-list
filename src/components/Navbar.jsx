@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core';
 import { AppBar, Toolbar, Typography, Button, IconButton, Drawer } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { SubjectOutlined } from '@material-ui/icons';
 
@@ -16,6 +16,7 @@ const useStyles = makeStyles({
 
 function Navbar() {
   const classes = useStyles();
+  const history = useHistory();
 
   const MenuItems = [
     {
@@ -33,6 +34,11 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const handleDrawer = () => {
     setIsOpen(true);
+  };
+
+  const handleRedirect = (path) => {
+    history.push(path);
+    setIsOpen(false);
   };
 
   return (
@@ -53,7 +59,7 @@ function Navbar() {
           <List>
             {MenuItems.map((item, index) => {
               return (
-                <ListItem key={index}>
+                <ListItem onClick={() => handleRedirect(item.path)} button key={index}>
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText>{item.text}</ListItemText>
                 </ListItem>
