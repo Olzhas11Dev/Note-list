@@ -3,13 +3,13 @@ import React, { useEffect, useState } from 'react';
 import CardItem from '../components/CardItem';
 
 function CardsSections() {
+  const [listData, setListData] = useState([]);
+
   useEffect(() => {
     fetch('https://6176c9f903178d00173dae84.mockapi.io/Notes')
       .then((res) => res.json())
       .then((data) => setListData(data));
   }, []);
-
-  const [listData, setListData] = useState([]);
 
   const handleRemove = async (id) => {
     await fetch('https://6176c9f903178d00173dae84.mockapi.io/Notes/' + id, {

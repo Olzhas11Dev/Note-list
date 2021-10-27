@@ -14,7 +14,7 @@ function CardItem({ note, handleRemove }) {
               <DeleteOutline />
             </IconButton>
           }
-          title={note.name}
+          title={note.title}
           subheader={note.createdAt}
         />
         <CardContent>
